@@ -1,0 +1,144 @@
+/* General body styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(to right, #91ff00, #00ff40);
+    color: #fff;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+}
+
+/* Container for the whole content */
+.container {
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    max-width: 1200px;
+    width: 90%;
+    text-align: center;
+    margin: 20px;
+}
+
+/* Heading styles */
+h1 {
+    font-size: 3em;
+    color: #FFD700;
+    margin-bottom: 40px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+}
+
+/* Weather result styles */
+#weather-result {
+    background-color: rgba(255, 255, 255, 0.2);
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 30px;
+    color: #FFD700;
+    font-size: 1.2em;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+/* Plant cards grid layout */
+.plant-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    margin-top: 40px;
+}
+
+/* Individual plant card styles */
+.plant-card {
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: left;
+    color: #fff;
+}
+
+/* Plant card hover effect */
+.plant-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.5);
+}
+
+/* Plant card image styling */
+.plant-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+/* Plant name in the card */
+.plant-card h2 {
+    font-size: 1.8em;
+    color: #FFD700;
+    margin-bottom: 10px;
+}
+
+/* Plant description text */
+.plant-card p {
+    font-size: 1.1em;
+    line-height: 1.5;
+}
+
+/* Input field and button container */
+.input-container {
+    margin-bottom: 30px;
+}
+
+/* Location input styles */
+input[type="text"] {
+    padding: 10px;
+    font-size: 1.1em;
+    border: none;
+    border-radius: 5px;
+    width: 250px;
+    margin-right: 10px;
+    outline: none;
+}
+
+/* Button styles */
+button {
+    padding: 12px 25px;
+    font-size: 1.1em;
+    background-color: #2fff00;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Button hover effect */
+button:hover {
+    background-color: #b58200;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .plant-cards {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    }
+
+    h1 {
+        font-size: 2.2em;
+    }
+
+    input[type="text"] {
+        width: 180px;
+        margin-bottom: 10px;
+    }
+
+    button {
+        width: 100%;
+    }
+}

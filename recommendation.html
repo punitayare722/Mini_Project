@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plant Recommendations</title>
+    <link rel="stylesheet" href="recommendation.css">
+    <script src="recommendation.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Plant Recommendations</h1>
+        <div class="input-container">
+            <label for="location">Enter Location: </label>
+            <input type="text" id="location" value="London">
+            <button onclick="getWeather()">Get Weather</button>
+        </div>
+        <div id="weather-result"></div>
+
+        <h1>Recommended Plants Based on Weather</h1>
+        <div id="plant-recommendations" class="plant-cards"></div>
+    </div>
+</body>
+</html>
