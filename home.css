@@ -104,3 +104,23 @@ footer {
     font-size: 1em;
     color: #FFD700;
 }
+/* Navigation styling for login button */
+nav {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+nav .login-btn {
+    text-decoration: none;
+    background-color: #4CAF50; /* You can change this if you want */
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    position: relative;
+}
+
+nav .login-btn:hover {
+    background-color: #45a049; /* Optional hover effect */
+}
