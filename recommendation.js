@@ -1,4 +1,4 @@
-const apiKey = '25b3425050854f489da150956242308'; // Your provided API key
+const apiKey = '6b1f5bafefd14a9891c170825241610'; // Your provided API key
 
 function getWeather() {
     const location = document.getElementById('location').value;
@@ -7,23 +7,31 @@ function getWeather() {
     fetch(apiUrl)
         .then(response => response.json())
         .then(data => {
-            const temperature = data.current.temp_c;
-            const humidity = data.current.humidity;
-            const weatherCondition = data.current.condition.text;
+            console.log(data); // Log the full response
+            
+            // Check if the data structure is as expected
+            if (data && data.current) {
+                const temperature = data.current.temp_c;
+                const humidity = data.current.humidity;
+                const weatherCondition = data.current.condition.text;
 
-            // Display weather information
-            document.getElementById('weather-result').innerHTML = `
-                <h2>Weather in ${location}</h2>
-                <p>Temperature: ${temperature}°C</p>
-                <p>Humidity: ${humidity}%</p>
-                <p>Condition: ${weatherCondition}</p>
-            `;
+                // Display weather information
+                document.getElementById('weather-result').innerHTML = `
+                    <h2>Weather in ${location}</h2>
+                    <p>Temperature: ${temperature}°C</p>
+                    <p>Humidity: ${humidity}%</p>
+                    <p>Condition: ${weatherCondition}</p>
+                `;
 
-            // Get plant recommendations based on the weather data
-            const recommendedPlants = recommendPlants(temperature, humidity);
+                // Get plant recommendations based on the weather data
+                const recommendedPlants = recommendPlants(temperature, humidity);
 
-            // Display recommended plants dynamically
-            displayRecommendedPlants(recommendedPlants);
+                // Display recommended plants dynamically
+                displayRecommendedPlants(recommendedPlants);
+            } else {
+                console.error('Unexpected data structure:', data);
+                document.getElementById('weather-result').innerText = 'Weather data is unavailable';
+            }
         })
         .catch(error => {
             console.error('Error fetching weather data:', error);
@@ -46,7 +54,7 @@ function recommendPlants(temperature, humidity) {
         ];
     } else if (temperature >= 20 && temperature <= 30) {
         return [
-            { name: 'Tomatoes', image: 'tomato.jpg', description: 'Ideal for mild, warm temperatures.' },
+            { name: 'Spider Plant', image: 'spider_plant.jpg', description: 'Ideal for mild, warm temperatures.' },
             { name: 'Lettuce', image: 'lettuce.jpg', description: 'Great for cool, moderate weather.' },
             { name: 'Basil', image: 'basil.jpg', description: 'Thrives in warm conditions.' }
         ];
