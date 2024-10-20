@@ -3,27 +3,144 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="buy.css">
     <title>Plant Shop</title>
+    <style>
+        .plant-card {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+            width: 200px;
+            margin: 10px;
+        }
+        .plant-card img {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+        }
+        .cart-sidebar {
+            position: fixed;
+            right: -300px;
+            top: 0;
+            width: 300px;
+            height: 100%;
+            background-color: #f1f1f1;
+            box-shadow: -2px 0 5px rgba(0,0,0,0.5);
+            transition: right 0.3s;
+            padding: 20px;
+            overflow-y: auto;
+        }
+        .cart-sidebar.open {
+            right: 0;
+        }
+        .cart-sidebar h2 {
+            text-align: center;
+        }
+        .cart-item {
+            margin-bottom: 15px;
+        }
+        .cart-item img {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            margin-right: 10px;
+        }
+        .cart-item p {
+            display: inline;
+        }
+        .cart-btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <h1>Plant Shop</h1>
-        <div class="cart-info">
-            <span id="cart-count">0</span> items in cart
-        </div>
-    </header>
-    
-    <main>
-        <section id="plant-list">
-            <!-- Plant items will be dynamically added here -->
-        </section>
-    </main>
 
-    <footer>
-        <p>&copy; 2024 Plant Shop</p>
-    </footer>
+    <h1>Plant Shop</h1>
+    <div id="plant-list" style="display: flex; flex-wrap: wrap;"></div>
 
-    <script src="buy.js"></script>
+    <button class="cart-btn" onclick="toggleCart()">View Cart (<span id="cart-count">0</span>)</button>
+
+    <!-- Cart Sidebar -->
+    <div id="cart-sidebar" class="cart-sidebar">
+        <h2>Your Cart</h2>
+        <div id="cart-items"></div>
+        <button class="cart-btn" onclick="toggleCart()">Close Cart</button>
+    </div>
+
+    <script>
+        // Sample data for plants
+        const plants = [
+            { id: 1, name: 'Snake Plant', price: 199, image: 'images/snakeplant.jpg' },
+            { id: 2, name: 'Aloe Vera', price: 150, image: 'images/aloevera.jpg' },
+            { id: 3, name: 'Spider Plant', price: 100, image: 'images/spider_plant.jpg' },
+            { id: 4, name: 'Rose Plant', price: 210, image: 'images/rose.jpg' },
+        ];
+
+        // Initialize cart
+        let cart = [];
+
+        // Function to add a plant to the cart
+        function addToCart(plantId) {
+            const plant = plants.find(p => p.id === plantId);
+            if (plant) {
+                cart.push(plant);
+                updateCartCount();
+                alert(`${plant.name} has been added to your cart!`);
+            }
+        }
+
+        // Function to update the cart count
+        function updateCartCount() {
+            document.getElementById('cart-count').textContent = cart.length;
+        }
+
+        // Function to display plants
+        function displayPlants() {
+            const plantList = document.getElementById('plant-list');
+            plants.forEach(plant => {
+                const plantCard = document.createElement('div');
+                plantCard.className = 'plant-card';
+                plantCard.innerHTML = `
+                    <img src="${plant.image}" alt="${plant.name}">
+                    <h2>${plant.name}</h2>
+                    <p>Price: ₹${plant.price}</p>
+                    <button onclick="addToCart(${plant.id})">Add to Cart</button>
+                `;
+                plantList.appendChild(plantCard);
+            });
+        }
+
+        // Function to toggle the cart sidebar
+        function toggleCart() {
+            const cartSidebar = document.getElementById('cart-sidebar');
+            cartSidebar.classList.toggle('open');
+            displayCartItems();
+        }
+
+        // Function to display cart items
+        function displayCartItems() {
+            const cartItems = document.getElementById('cart-items');
+            cartItems.innerHTML = ''; // Clear previous items
+            if (cart.length === 0) {
+                cartItems.innerHTML = '<p>Your cart is empty.</p>';
+            } else {
+                cart.forEach(item => {
+                    const cartItem = document.createElement('div');
+                    cartItem.className = 'cart-item';
+                    cartItem.innerHTML = `
+                        <img src="${item.image}" alt="${item.name}">
+                        <p>${item.name} - ₹${item.price}</p>
+                    `;
+                    cartItems.appendChild(cartItem);
+                });
+            }
+        }
+
+        // Call displayPlants on page load
+        window.onload = displayPlants;
+    </script>
+
 </body>
 </html>
